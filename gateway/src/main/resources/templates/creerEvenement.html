@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Evènement</title>
+
+    <div th:insert="include/lib :: libImport"></div>
+
+    <script th:src="@{/js/vueEvenementsPriver.js}" ></script>
+
+</head>
+
+
+<body>
+<!--MENU-->
+<div th:include="include/nav :: navMenu"></div>
+
+<!-- Begin page content -->
+<main class="container">
+    <input type="hidden" id="idValue" th:value="${session.pseudo}" />
+
+    <div class="row create-page">
+        <div class="col-md-10 col-lg-8">
+            <header class="title mb-2">Créer un évènement privé </header>
+            <form onsubmit="return false;"  enctype="multipart/form-data" id="creerEventForm" class="needs-validation ml-1" >
+                <div class="form-group">
+                    <label for="event-titre">Titre </label>
+                    <input type="text" class="form-control" id="titre" value="Karaoké" name="titre" placeholder="Titre évènement" required>
+                    <div class="invalid-feedback">
+                        Titre est obligatoire.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="ville">Ville</label>
+                    <input type="text" class="form-control" id="ville" value="Orleans"  name="ville" placeholder="Nom de la ville" required>
+                    <div class="invalid-feedback">
+                        nom de la ville obligatoire.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="adresse">adresse</label>
+                    <input type="text" class="form-control" id="adresse" value="19 rue jean d aulon" name="adresse" placeholder="adresse..." required>
+                    <div class="invalid-feedback">
+                        Adresse est obligatoire.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dateDebut">Date debut</label>
+                    <input data-date-format="dd/mm/yyyy" type="date" value="2019-01-09"  class="form-control" name="dateDebut" id="dateDebut" placeholder="date debut " required>
+                    <div class="invalid-feedback">
+                        Date debut obligatoire.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dateFin">Date fin</label>
+                    <input data-date-format="dd/mm/yyyy" type="date" value="2019-01-10" class="form-control" id="dateFin" name="dateFin" placeholder="date fin " required>
+                    <div class="invalid-feedback">
+                        Date fin obligatoire.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id="description" name="descriptionV" rows="3" placeholder="Description evenement" required> chanter, danser avec du plaisir</textarea>
+                    <div class="invalid-feedback">
+                        Description est obligatoire.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="tags">tags</label>
+                    <input class="form-control" id="tags" value="chanter, danser" name="tags" placeholder="tags..." required>
+                    <div class="invalid-feedback">
+                        tags obligatoire.
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" type="submit">Créer</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+<!-- Sticky Footer -->
+<footer class="footer mt-5">
+    <div class="container py-2 text-center">
+        <div class="text-muted mt-1">Event System</div>
+        <div class="text-muted mb-1">Orléans © 2018</div>
+    </div>
+</footer>
+
+
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<header th:fragment="navMenu" xmlns:th="http://www.springframework.org/schema/security">
+    <!-- Fixed navbar -->
+    <nav class="p-3 navbar navbar-expand-md navbar-light fixed-top bg-light">
+        <a class="navbar-brand" href="#">
+            <img th:src="@{/img/icon.png}" height="50px" width="80px">
+        </a>
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                    aria-controls="navbarCollapse"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul th:if="${session.pseudo}" class="navbar-nav">
+
+                    <li class="nav-item home active">
+                        <a class="nav-link" href="/accueilP">Accueil</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Amis
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="profile">Profile</a>
+                            <a class="dropdown-item" href="ajouterAmis">Gestion d'Amis</a>
+
+                        </div>
+
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                           aria-haspopup="true" aria-expanded="false">Evenements</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="mesEvenementsPublics">Mes évènements publics</a>
+                            <a class="dropdown-item" href="mesEvenementsPrives">Mes évènements prives</a>
+                            <a class="dropdown-item" href="creerEvenement">Creer evenement prive</a>
+                        </div>
+
+                    </li>
+
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                           aria-haspopup="true" aria-expanded="false">Soiree</a>
+                        <div class="dropdown-menu">
+                            <a class="nav-link" href="/creerSoiree">Creer Soirée</a>
+                            <a class="nav-link" href="/afficherSoiree">Afficher Soirées </a>
+                        </div>
+
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                           aria-haspopup="true" aria-expanded="false">Notification <span
+                                class="badge badge-primary badge-pill">1</span></a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="invitationAmis">Invitations d'amis
+                                <span class="badge badge-primary badge-pill">1</span></a>
+                        </div>
+
+                    </li>
+
+
+                </ul>
+
+                <!-- Search bar -->
+
+                <!-- Connexion -->
+                <!--<ul class="navbar-nav">-->
+                <!--<li class="nav-item dropdown">-->
+                <!--<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"-->
+                <!--aria-expanded="false">-->
+                <!--Username-->
+                <!--</a>-->
+                <!--<div class="dropdown-include" aria-labelledby="navbarDropdown">-->
+                <!--<a class="dropdown-item" href="#">Connexion</a>-->
+                <!--</div>-->
+                <!--</li>-->
+                <!--</ul>-->
+
+                <ul th:if="${session.pseudo == null}" class="navbar-nav">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/connexion">Connexion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/inscription">Inscription</a>
+                    </li>
+                </ul>
+
+                <ul th:if="${session.pseudo != null}" class="navbar-nav">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Déconnexion (<span th:utext="${session.pseudo}"></span>)</a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+</header>

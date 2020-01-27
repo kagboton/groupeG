@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Evènement</title>
+
+    <div th:insert="include/lib :: libImport"></div>
+
+    <script th:src="@{/js/vueGestionAmis.js}"></script>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/amis.css}"/>
+
+</head>
+
+
+<body>
+<!--MENU-->
+<div th:include="include/nav :: navMenu"></div>
+
+<!--Les evenements -->
+
+<main class="container">
+    <header class="title">Gestion Amis</header>
+
+    <input type="hidden" id="idValue" th:value="${session.pseudo}"/>
+    <div class="row">
+        <div class="col-lg-6 col-md-9 mx-auto mt-5">
+            <div class="card shadow">
+                <h3 class="card-header">Ajouter des nouveaux amis</h3>
+                <div class="card-body">
+                    <form id="new-friend">
+                        <div class="form-group">
+                            <div class="containerAmis" data-behaviour="search-on-list">
+                                <input type="text" class="input-query" data-search-on-list="search"
+                                       placeholder="chercher par nom ou prénom..."/>
+                                <span class="counter" data-search-on-list="counter"></span>
+                                <div class="list-wrap" id="ListAmisVue">
+
+
+                                    <ul class="listAmis list" data-search-on-list="list" v-for="(a, index) in users">
+
+
+                                        <li v-if="pseudoUser != a.pseudo && !friendsamisRES.includes( a.pseudo) "
+                                            class="list-item" data-search-on-list="list-item">
+
+                                            <a href="" class="list-item-link">{{ a.pseudo }} <span
+                                                    class="item-list-subtext">{{a.prenom}}</span></a>
+                                            <input class="form-check-input" type="checkbox" name="amis"
+                                                   v-bind:value="a.pseudo" id="defaultCheck1">
+
+                                        </li>
+
+
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-info btn-block mt-3">Inviter</button>
+
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="col-lg-6 col-md-9 mx-auto mt-5">
+
+            <div class="card mt-3">
+                <h3 class="card-header">Mes amis</h3>
+                <div class="card-body" id="friendsVue">
+                    <ul id="friend-output" class="list-group" v-for="(a, index) in friends">
+                        <li class="list-group-item">{{ a }}</li>
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+</body>
+
+
+</html>

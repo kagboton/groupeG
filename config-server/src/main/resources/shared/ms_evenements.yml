@@ -1,0 +1,16 @@
+server:
+  port: 8085
+
+spring:
+  jpa:
+    show-sql: true
+  h2:
+    console:
+      enable: true
+
+
+#Eureka
+eureka:
+  instance:
+    health-check-url-path: /evenements/actuator/health
+    statusPageUrlPath: /evenements/actuator/info

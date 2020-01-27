@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Evènement</title>
+
+    <div th:insert="include/lib :: libImport"></div>
+
+    <script th:src="@{/js/vueSoire.js}" ></script>
+
+    <script th:src="@{/js/vueEvenementsPriver.js}" ></script>
+
+    <script th:src="@{/js/vueEvenementsPublics.js}" ></script>
+    <script src="../static/js/vueGestionAmis.js"></script>
+
+</head>
+
+
+<body>
+<!--MENU-->
+<div th:include="include/nav :: navMenu"></div>
+
+<!-- Begin page content -->
+<main class="container">
+    <input type="hidden" id="idValue" th:value="${session.pseudo}" />
+    <header class="title">Choisir événements privés</header>
+    <form onsubmit="return false;"  enctype="multipart/form-data" id="creerSoireForm" class="needs-validation ml-1" >
+        <table class="table table-sm" id="evenementsPriveVue">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">choix</th>
+                <th scope="col">Titre</th>
+                <th scope="col">description</th>
+                <th scope="col">date debut</th>
+                <th scope="col">date fin</th>
+                <th scope="col">lieu</th>
+                <th scope="col">tarif</th>
+            </tr>
+            </thead>
+            <tbody v-for="(a, index) in evenementPriveList">
+
+            <tr >
+                <th scope="row">{{ index }}</th>
+                <td><input class="form-check-input" type="checkbox" name="eventsPub" v-bind:value="a.idEvent" id="eventsPub"></td>
+                <td>{{ a.titre }}
+                </td>
+                <td>{{ a.description }}</td>
+                <td>{{ a.dateDebut }}</td>
+                <td>{{ a.dateFin }}</td>
+                <td>{{ a.ville }} + {{ a.nomLieu }}</td>
+                <td>{{a.tarification}}</td>
+            </tr>
+
+
+            </tbody>
+        </table>
+
+
+        <header class="title">Choisir événements publics</header>
+        <table class="table table-sm" id="evenementsVue">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Choix</th>
+                <th scope="col">Titre</th>
+                <th scope="col">Description</th>
+                <th scope="col">Date debut  </th>
+                <th scope="col">Date fin  </th>
+                <th scope="col">Lieu</th>
+                <th scope="col">Tarif</th>
+            </tr>
+            </thead>
+            <tbody v-for="(a, index) in evenementList">
+
+            <tr >
+                <th scope="row">{{ index }}</th>
+                <td><input class="form-check-input" type="checkbox" name="eventsPrive" v-bind:value="a.idEvent" id="eventsPriv"></td>
+                <td>{{ a.titre }}
+                </td>
+                <td>{{ a.description }}</td>
+                <td>{{ a.dateDebut }}</td>
+                <td>{{ a.dateFin }}</td>
+                <td>{{ a.ville }} + {{ a.nomLieu }}</td>
+                <td>{{a.tarification}}</td>
+            </tr>
+
+
+            </tbody>
+        </table>
+
+
+        <div class="form-group">
+            <label for="dateSoire">Date de la soirée</label>
+            <input  data-date-format="dd/mm/yyyy" type="date"  value="2000/01/01"  class="form-control" name="dateSoire" placeholder="date Soirée " required>
+            <div class="invalid-feedback">
+                Date soirée obligatoire.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="timeSoire">Date de la soirée</label>
+            <input  data-date-format="dd/mm/yyyy HH:mm" type="time" value="00:00"  class="form-control" name="timeSoire" placeholder="time Soirée " required>
+            <div class="invalid-feedback">
+                Date soirée obligatoire.
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <label for="nbrPlaces">Nombre des invités </label>
+            <select class="form-control" id="nbrPlaces">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label for="description">Description de la soirée</label>
+            <textarea class="form-control" id="description" name="descriptionV" rows="3" placeholder="Description evenement" required> Soirée pour tout le monde</textarea>
+            <div class="invalid-feedback">
+                Description est obligatoire.
+            </div>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Créer soirée</button>
+
+    </form>
+
+
+
+</main>
+
+<!-- Sticky Footer -->
+<footer class="footer mt-5">
+    <div class="container py-2 text-center">
+        <div class="text-muted mt-1">Event System</div>
+        <div class="text-muted mb-1">Orléans © 2018</div>
+    </div>
+</footer>
+</body>
+
+</html>

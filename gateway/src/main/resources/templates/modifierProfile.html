@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Modifier profil</title>
+
+    <div th:insert="include/lib :: libImport"></div>
+
+    <script th:src="@{/js/vueProfile.js}" ></script>
+</head>
+
+
+<body>
+<!--MENU-->
+<div th:include="include/nav :: navMenu"></div>
+
+<!--Les evenements -->
+<input type="hidden" id="idValue" th:value="${session.pseudo}" />
+
+<main class="container">
+    <header class="title text-center">Modifier Profil</header>
+    <!-- Display list of cards -->
+    <div class="annonces" id="evenementsVue" v-if="evenementList">
+        <div class="row">
+            <div id="errorProfile">
+                <div v-if="afficher" class="alert alert-danger alert-dismissible">
+                    <strong>Erreur!</strong> {{ message }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <form role="form" action="#" method="post" id="UpdateProfileForm"   class="form-horizontal">
+
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label">
+                            Pseudo</label>
+
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="pseudoInscr" placeholder="Votre Login" value="moal" />
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="Nom" class="col-sm-2 control-label">
+                            Nom</label>
+
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="nom" placeholder="Votre Nom" value="Moal" />
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label">
+                            Prénom</label>
+
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="prenom" placeholder="Votre Prenom" value="moal" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="col-sm-5 control-label">
+                            Numero de tel</label>
+
+                        <div class="col-md-10">
+                            <input type="number" class="form-control" name="numtel" placeholder="Votre Numero de tel" value="065223365" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="col-sm-5 control-label">
+                            Date de naissance</label>
+
+                        <div class="col-10">
+                            <input type="date" name="dateNaiss" class="form-control"  value="1970-05-18" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="col-sm-5 control-label">
+                            Sexe</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="sexeRadio" id="exampleRadios1" value="Homme" checked>
+                            <label class="form-check-label" for="exampleRadios1">
+                                Homme
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="sexeRadio" id="exampleRadios2" value="Femme">
+                            <label class="form-check-label" for="exampleRadios2">
+                                Femme
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="email" class="col-sm-5 control-label">
+                            Situation</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="situationRadio" id="exampleRadios3" value="Célibataire" checked>
+                            <label class="form-check-label" for="exampleRadios1">
+                                Célibataire
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="situationRadio" id="exampleRadios4" value="En couple">
+                            <label class="form-check-label" for="exampleRadios2">
+                                En couple
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label">
+                            Email</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Votre Email" value="cicino@hotmail.com" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="passwordInscr" class="col-sm-5 control-label">
+                            Mot de passe</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" name="passwordInscr" id="passwordInscr" placeholder="Votre mot de passe" value="" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="passwordConf" class="col-sm-5 control-label">
+                            Mot de passe(confirmation)</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" name="passwordConf" id="passwordConf" placeholder="Votre mot de passe(confirmation)" value="" />
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Modifier</button>
+                </form>
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+</main>
+
+</body>
+
+
+
+
+
+
+</html>

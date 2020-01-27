@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Connexion</title>
+
+    <div th:insert="include/lib :: libImport"></div>
+
+    <script th:src="@{/js/vueAuthentification.js}"></script>
+</head>
+
+
+<body>
+<!--MENU-->
+<div th:include="include/nav :: navMenu"></div>
+
+<!--Les evenements -->
+
+<main class="container">
+    <header class="title text-center">Connexion</header>
+    <!-- Display list of cards -->
+    <div class="annonces" id="evenementsVue" v-if="evenementList">
+        <div class="row">
+            <div id="errorConnexion">
+                <div v-if="afficher" class="alert alert-danger alert-dismissible">
+                    <strong>Erreur!</strong> {{ message }}
+                </div>
+            </div>
+
+            <div id="errorInscription">
+                <div v-if="afficher" class="alert alert-danger alert-dismissible">
+                    <strong>Erreur!</strong> {{ message }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <form role="form" name="nameConnex" id="connexForm" action="#" method="post" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="login" class="col-sm-2 control-label">
+                            Pseudo</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="login" placeholder="login"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="col-sm-5 control-label">
+                            Mot de passe</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" name="password" placeholder="mot de passe"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary">Connexion</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+
+    </div>
+
+</main>
+
+</body>
+
+
+</html>

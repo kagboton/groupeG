@@ -1,0 +1,113 @@
+version: '2.1'
+services:
+  config-server:
+    build: config-server
+    restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+    ports:
+      - 8888:8888
+
+  eureka-server:
+    build: eureka-server
+    restart: always
+    depends_on:
+      config-server:
+        condition: service_healthy
+    ports:
+      - 9102:9102
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  gateway:
+    build: gateway
+    restart: always
+    depends_on:
+      config-server:
+        condition: service_healthy
+    ports:
+      - 8080:8080
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  ms_users:
+    build: ms_users
+    restart: always
+    ports:
+      - 8084:8084
+    depends_on:
+      config-server:
+        condition: service_healthy
+      mysql_db:
+        condition: service_started
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  ms_soirees:
+    build: ms_soirees
+    restart: always
+    ports:
+      - 8082:8082
+    depends_on:
+      config-server:
+        condition: service_healthy
+      mysql_db:
+        condition: service_started
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  ms_evenements:
+    build: ms_evenements
+    depends_on:
+      config-server:
+        condition: service_healthy
+    ports:
+      - 8085:8085
+
+  ms_authentification:
+    build: ms_authentification
+    restart: always
+    depends_on:
+      config-server:
+        condition: service_healthy
+      mysql_db:
+        condition: service_started
+    ports:
+      - 5000:5000
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  mysql_db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - "3306:3306"
+    restart: always
+    command: mysqld --default_authentication_plugin=mysql_native_password
+
+  redis_db:
+    image: redis
+    volumes:
+      - /var/redis:/data
+    command: redis-server --appendonly yes
+    ports:
+      - 6379:6379
+
+
+volumes:
+  db_data: {}

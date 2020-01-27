@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: ms_users
+  cloud:
+    config:
+      uri: http://config-server:8888
+      fail-fast: false
+      password: 123
+      username: user
+
+  main:
+    allow-bean-definition-overriding: true

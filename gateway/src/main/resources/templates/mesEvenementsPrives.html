@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Evènement</title>
+
+    <div th:insert="include/lib :: libImport"></div>
+
+    <script th:src="@{/js/vueEvenementsPriver.js}" ></script>
+
+</head>
+
+
+<body>
+<!--MENU-->
+<div th:include="include/nav :: navMenu"></div>
+
+<!--Les evenements -->
+
+<main class="container">
+    <input type="hidden" id="idValue" th:value="${session.pseudo}"/>
+    <header class="title">Evenemennts Privés à venir</header>
+    <!-- Display list of cards -->
+    <div class="annonces" id="evenementsPriveVue" v-if="evenementPriveList">
+        <div class="row">
+
+            <div v-for="(a, index) in evenementPriveList" class="col-lg-6 my-3">
+                <div class="card">
+                    <h5 class="card-header d-flex justify-content-between">
+                        <!--<a href="#" class="text-dark">{{ a.metas.title }}</a>-->
+                        <a href="#" class="text-dark">{{ a.titre }}</a>
+                        <!--<a href="#">-->
+                        <!--<i class="far fa-edit text-muted">-->
+                        <!--<span class="small">Modifier</span>-->
+                        <!--</i>-->
+                        <!--</a>-->
+                    </h5>
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <!--<p class="card-text">{{ a.metas.description }}</p>-->
+                        <p class="card-text">Description:  {{ a.description }}
+                        </p>
+                        <div class="info">
+                            <div class="mb-2">
+                                <p class="card-text"><i class='far fa-calendar-alt'></i> Date début : {{ a.dateDebut }} </p>
+                            </div>
+                            <div class="mb-2">
+                                <p class="card-text"><i class='far fa-calendar-alt'></i> Date fin : {{ a.dateFin }} </p>
+                            </div>
+                            <div class="mb-2">
+                                <p class="card-text"> <i class='far fa-building'></i> Ville : {{ a.ville }} </p>
+                            </div>
+                            <div class="mb-2">
+                                <p class="card-text"> <i class='fas fa-map-pin'></i> Place: {{ a.nomLieu }} </p>
+                            </div>
+                            <div class="mb-2">
+                                <p class="card-text"> <i class='fas fa-map-marker-alt'></i> Adresse : {{a.adresse}} </p>
+                            </div>
+                            <div class="mb-2">
+                                <p class="card-text"> <i class='fas fa-donate'></i> Tarif : {{a.tarification}} </p>
+                            </div>
+                            <div class="mb-2">
+                                <p class="card-text"> <i class='fas fa-ticket-alt'></i> <a v-bind:href="a.lienEvent">Lien d'achat de ticket (si ce n'est pas gratuit)</a></p>
+                            </div>
+                            <div class="mb-2">
+                                <p class="card-text"> <i class='fas fa-tags'></i> Tags :{{a.tags}} </p>
+                            </div>
+
+                            <!--<a href="#" class="btn btn-primary book-in">Reserver</a>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </span>
+        </div>
+
+    </div>
+
+</main>
+
+</body>
+
+
+
+
+
+
+</html>

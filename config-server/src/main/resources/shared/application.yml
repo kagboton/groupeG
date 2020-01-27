@@ -1,0 +1,42 @@
+logging:
+  level:
+    org.springframework.security: INFO
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+
+eureka:
+  instance:
+    prefer-ip-address: false
+    leaseRenewalIntervalInSeconds: 10
+  client:
+    serviceUrl:
+      defaultZone: http://eureka-server:9102/eureka/
+
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://ms_authentification:5000/uaa/users/current
+
+management.security.enabled: false
+management:
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true

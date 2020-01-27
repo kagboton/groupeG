@@ -1,0 +1,59 @@
+server:
+  port: 8080
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
+
+eureka:
+  instance:
+    health-check-url-path: /actuator/health
+    statusPageUrlPath: /actuator/info
+
+zuul:
+  ignoredServices: '*'
+  host:
+    connect-timeout-millis: 20000
+    socket-timeout-millis: 20000
+
+  routes:
+    ms_authentification:
+      path: /uaa/**
+      url: http://ms_authentification:5000
+      stripPrefix: false
+      sensitiveHeaders:
+
+    ms_users:
+      path: /users/**
+      url: http://ms_users:8084
+      serviceId: ms_users
+      stripPrefix: false
+      sensitiveHeaders:
+
+    ms_evenements:
+      path: /evenements/**
+      url: http://ms_evenements:8085
+      serviceId: ms_evenements
+      stripPrefix: false
+      sensitiveHeaders:
+
+    ms_soirees:
+      path: /soirees/**
+      url: http://ms_soirees:8082
+      serviceId: ms_soirees
+      stripPrefix: false
+      sensitiveHeaders:
+
+    test:
+      path: /test/**
+      serviceId: test
+      stripPrefix: false
+      sensitiveHeaders:
